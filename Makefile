@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -Wall -Wextra -O2
+CFLAGS = -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -O2
 FRAMEWORKS = -framework IOKit -framework CoreFoundation
 LIBS = -lm
 
