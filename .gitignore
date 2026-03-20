@@ -1,0 +1,21 @@
+# Compiled binaries
+chooser
+sensors
+space_impact
+flappy_bird
+space_invaders
+dino
+*.o
+*.dSYM/
+
+# macOS
+.DS_Store
+
+# Claude
+.claude/
+CLAUDE.md
+
+# Editor
+*.swp
+*.swo
+*~
