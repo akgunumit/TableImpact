@@ -131,7 +131,34 @@ static void accel_report_cb(void *ctx, IOReturn result, void *sender,
     }
 }
 
+// Wake SPU drivers — powers on the accelerometer hardware.
+// Without this, the sensor is dormant after a fresh boot until
+// something (like `spank`) pokes these properties.
+static void wake_spu_drivers(void) {
+    CFMutableDictionaryRef match = IOServiceMatching("AppleSPUHIDDriver");
+    if (!match) return;
+    io_iterator_t iter = 0;
+    if (IOServiceGetMatchingServices(kIOMainPortDefault, match, &iter) != KERN_SUCCESS || !iter)
+        return;
+    io_service_t svc;
+    while ((svc = IOIteratorNext(iter)) != IO_OBJECT_NULL) {
+        int32_t one = 1;
+        int32_t interval = 1000; // microseconds → ~1kHz reports
+        CFNumberRef cfOne      = CFNumberCreate(NULL, kCFNumberSInt32Type, &one);
+        CFNumberRef cfInterval = CFNumberCreate(NULL, kCFNumberSInt32Type, &interval);
+        IORegistryEntrySetCFProperty(svc, CFSTR("SensorPropertyReportingState"), cfOne);
+        IORegistryEntrySetCFProperty(svc, CFSTR("SensorPropertyPowerState"),     cfOne);
+        IORegistryEntrySetCFProperty(svc, CFSTR("ReportInterval"),               cfInterval);
+        CFRelease(cfOne);
+        CFRelease(cfInterval);
+        IOObjectRelease(svc);
+    }
+    IOObjectRelease(iter);
+}
+
 static int setup_accel(void) {
+    wake_spu_drivers();
+
     CFMutableDictionaryRef match = IOServiceMatching("AppleSPUHIDDevice");
     if (!match)
         match = IOServiceMatching("AppleSPUHIDInterface");

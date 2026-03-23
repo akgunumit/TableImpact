@@ -120,6 +120,7 @@ sudo ./flappy_bird      # Flappy Bird directly
 sudo ./space_invaders   # Space Invaders directly
 sudo ./dino             # Dino Runner directly
 sudo ./sensors          # Raw sensor output (debug)
+sudo ./precise_sensors  # Precise sensor monitor (no calibration, 30Hz)
 ```
 
 Without root, games run in auto-pilot demo mode - useful for testing the display without sensor access.

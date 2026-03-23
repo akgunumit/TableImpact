@@ -5,12 +5,15 @@ LIBS = -lm
 
 .PHONY: all clean
 
-all: chooser sensors space_impact flappy_bird space_invaders dino
+all: chooser sensors precise_sensors space_impact flappy_bird space_invaders dino
 
 chooser: chooser.c game_engine.h sensors.h
 	$(CC) $(CFLAGS) -o $@ chooser.c $(FRAMEWORKS) $(LIBS)
 
 sensors: sensors.c
+	$(CC) $(CFLAGS) -o $@ $< $(FRAMEWORKS) $(LIBS)
+
+precise_sensors: precise_sensors.c
 	$(CC) $(CFLAGS) -o $@ $< $(FRAMEWORKS) $(LIBS)
 
 space_impact: space_impact.c game_engine.h sensors.h
@@ -26,4 +29,4 @@ dino: dino.c game_engine.h sensors.h
 	$(CC) $(CFLAGS) -o $@ dino.c $(FRAMEWORKS) $(LIBS)
 
 clean:
-	rm -f chooser sensors space_impact flappy_bird space_invaders dino
+	rm -f chooser sensors precise_sensors space_impact flappy_bird space_invaders dino
