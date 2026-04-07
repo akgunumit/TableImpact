@@ -109,7 +109,7 @@ Brick breaker with physical controls.
 Tap-to-stack block tower builder.
 
 - **Tap desk** to place the sliding block
-- Overhanging parts get trimmed off — blocks shrink on imperfect placements
+- Overhanging parts get trimmed off - blocks shrink on imperfect placements
 - Perfect alignment earns a flash and grows the block back
 - Tower scrolls upward as you build higher
 
@@ -118,8 +118,8 @@ Tap-to-stack block tower builder.
 Speed-chopping survival game.
 
 - **Tap desk** to chop the bottom log and switch sides
-- Don't stand under a branch — it's instant death
-- Timer drains constantly — chop faster to refill it
+- Don't stand under a branch - it's instant death
+- Timer drains constantly - chop faster to refill it
 - Three difficulty phases: the timer eventually outpaces your max tap speed
 
 ### Quick Draw
@@ -129,7 +129,7 @@ Western reaction-time duel tournament.
 - **Wait** for "DRAW!" then **tap desk** as fast as possible
 - Beat 8 opponents from Slowpoke Sam (900ms) to El Diablo (180ms)
 - Tap too early during "WAIT" = disqualified
-- Reaction time measured in milliseconds — track your best
+- Reaction time measured in milliseconds - track your best
 
 ---
 
