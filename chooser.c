@@ -15,14 +15,18 @@ typedef struct {
     const char *desc;
 } GameEntry;
 
-static const GameEntry games[4] = {
+static const GameEntry games[8] = {
     { "S P A C E   I M P A C T",     "./space_impact",    "Side-scrolling shooter" },
     { "F L A P P Y   B I R D",       "./flappy_bird",     "Tap to flap" },
     { "S P A C E   I N V A D E R S", "./space_invaders",  "Classic alien shooter" },
     { "D I N O   R U N N E R",       "./dino",            "Endless runner" },
+    { "A R K A N O I D",             "./arkanoid",        "Brick breaker" },
+    { "S T A C K   T O W E R",       "./stack_tower",     "Tap to stack blocks" },
+    { "L U M B E R J A C K",         "./lumberjack",      "Chop fast, dodge branches" },
+    { "Q U I C K   D R A W",         "./quick_draw",      "Western reaction duel" },
 };
 
-#define NUM_GAMES 4
+#define NUM_GAMES 8
 #define SHIMMER_PERIOD 90
 
 static void game_tick(CFRunLoopTimerRef timer, void *info);
@@ -225,30 +229,33 @@ static void game_tick(CFRunLoopTimerRef timer, void *info) {
     draw_3d_umit(cx, cy - 5, cos_r, sin_r);
     draw_center(cy + 3, "umit.cc", C_GRAY);
 
-    // game list
+    // game list — two-column grid (4 per column)
     int list_y = cy + 5;
+    int lcx = term_w / 4;          // left column center
+    int rcx = term_w * 3 / 4;      // right column center
+
     for (int i = 0; i < NUM_GAMES; i++) {
-        int row = list_y + i * 3;
+        int col = i / 4;           // 0=left, 1=right
+        int ri  = i % 4;           // row within column
+        int row = list_y + ri;
+        int ccx = (col == 0) ? lcx : rcx;
+        int nlen = (int)strlen(games[i].name);
+        int x0 = ccx - nlen / 2;
+
         if (i == selected) {
-            // selector arrow
-            int name_len = (int)strlen(games[i].name);
-            int x0 = cx - name_len / 2;
             grid_str(x0 - 3, row, ">>", C_HICYAN);
-
-            // shimmer on selected name
-            draw_shimmer(row, games[i].name, cx);
-
-            // description below selected
-            draw_center(row + 1, games[i].desc, C_WHITE);
+            draw_shimmer(row, games[i].name, ccx);
         } else {
-            draw_center(row, games[i].name, C_GRAY);
-            // dim description for unselected
-            draw_center(row + 1, games[i].desc, C_GRAY);
+            grid_str(x0, row, games[i].name, C_GRAY);
         }
     }
 
+    // description of selected game — centered below the grid
+    int desc_y = list_y + 5;
+    draw_center(desc_y, games[selected].desc, C_WHITE);
+
     // controls hint
-    int hint_y = list_y + NUM_GAMES * 3;
+    int hint_y = desc_y + 2;
     if (has_accel)
         draw_center(hint_y, "TILT to select  |  TAP to launch", C_GRAY);
     else

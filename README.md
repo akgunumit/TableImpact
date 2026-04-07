@@ -95,6 +95,42 @@ Classic flappy bird in your terminal.
 - Navigate through pipes - pipes get narrower as your score climbs
 - Gravity pulls the bird down; time your taps to stay airborne
 
+### Arkanoid
+
+Brick breaker with physical controls.
+
+- **Tilt screen** to move paddle left/right
+- **Tap desk** to launch the ball
+- Break all bricks to advance through levels
+- Catch powerups as they fall
+
+### Stack Tower
+
+Tap-to-stack block tower builder.
+
+- **Tap desk** to place the sliding block
+- Overhanging parts get trimmed off — blocks shrink on imperfect placements
+- Perfect alignment earns a flash and grows the block back
+- Tower scrolls upward as you build higher
+
+### Lumberjack
+
+Speed-chopping survival game.
+
+- **Tap desk** to chop the bottom log and switch sides
+- Don't stand under a branch — it's instant death
+- Timer drains constantly — chop faster to refill it
+- Three difficulty phases: the timer eventually outpaces your max tap speed
+
+### Quick Draw
+
+Western reaction-time duel tournament.
+
+- **Wait** for "DRAW!" then **tap desk** as fast as possible
+- Beat 8 opponents from Slowpoke Sam (900ms) to El Diablo (180ms)
+- Tap too early during "WAIT" = disqualified
+- Reaction time measured in milliseconds — track your best
+
 ---
 
 ## Build & Run
@@ -119,6 +155,10 @@ sudo ./space_impact     # Space Impact directly
 sudo ./flappy_bird      # Flappy Bird directly
 sudo ./space_invaders   # Space Invaders directly
 sudo ./dino             # Dino Runner directly
+sudo ./arkanoid         # Arkanoid directly
+sudo ./stack_tower      # Stack Tower directly
+sudo ./lumberjack       # Lumberjack directly
+sudo ./quick_draw       # Quick Draw directly
 sudo ./sensors          # Raw sensor output (debug)
 sudo ./precise_sensors  # Precise sensor monitor (no calibration, 30Hz)
 ```
@@ -136,6 +176,10 @@ TableImpact/
 ├── flappy_bird.c      # Flappy Bird game
 ├── space_invaders.c   # Space Invaders game
 ├── dino.c             # Dino Runner game
+├── arkanoid.c         # Arkanoid game
+├── stack_tower.c      # Stack Tower game
+├── lumberjack.c       # Lumberjack game
+├── quick_draw.c       # Quick Draw game
 ├── game_engine.h      # Shared engine (grid renderer, particles, starfield, 3D title)
 ├── sensors.h          # Sensor interface (accelerometer + lid angle)
 ├── sensors.c          # Standalone sensor debugger
